@@ -6,7 +6,11 @@ import {
   User, UpdateUserRequest,
   UserProfile, CreateUserProfileRequest, UpdateUserProfileRequest,
   WorkoutLog, CreateWorkoutLogRequest, UpdateWorkoutLogRequest,
-  WorkoutExercise, CreateWorkoutExerciseRequest, UpdateWorkoutExerciseRequest
+  WorkoutExercise, CreateWorkoutExerciseRequest, UpdateWorkoutExerciseRequest,
+  Goal, CreateGoalRequest, UpdateGoalRequest,
+  NutritionLog, CreateNutritionLogRequest, UpdateNutritionLogRequest,
+  BodyMeasurement, CreateBodyMeasurementRequest, UpdateBodyMeasurementRequest,
+  Exercise
 } from '../../shared/models';
 
 @Injectable({ providedIn: 'root' })
@@ -97,5 +101,61 @@ export class ApiService {
 
   deleteWorkoutExercise(id: string): Observable<void> {
     return this.http.delete<void>(`${this.base}/WorkoutExercise/${id}`);
+  }
+
+  // ===== GOALS =====
+  getGoalsForUser(userId: string): Observable<Goal[]> {
+    return this.http.get<Goal[]>(`${this.base}/Goal/user/${userId}`);
+  }
+
+  createGoal(req: CreateGoalRequest): Observable<Goal> {
+    return this.http.post<Goal>(`${this.base}/Goal`, req);
+  }
+
+  updateGoal(id: string, req: UpdateGoalRequest): Observable<void> {
+    return this.http.put<void>(`${this.base}/Goal/${id}`, req);
+  }
+
+  deleteGoal(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.base}/Goal/${id}`);
+  }
+
+  // ===== NUTRITION LOGS =====
+  getNutritionLogsForUser(userId: string): Observable<NutritionLog[]> {
+    return this.http.get<NutritionLog[]>(`${this.base}/NutritionLog/user/${userId}`);
+  }
+
+  createNutritionLog(req: CreateNutritionLogRequest): Observable<NutritionLog> {
+    return this.http.post<NutritionLog>(`${this.base}/NutritionLog`, req);
+  }
+
+  updateNutritionLog(id: string, req: UpdateNutritionLogRequest): Observable<void> {
+    return this.http.put<void>(`${this.base}/NutritionLog/${id}`, req);
+  }
+
+  deleteNutritionLog(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.base}/NutritionLog/${id}`);
+  }
+
+  // ===== BODY MEASUREMENTS =====
+  getBodyMeasurementsForUser(userId: string): Observable<BodyMeasurement[]> {
+    return this.http.get<BodyMeasurement[]>(`${this.base}/BodyMeasurement/user/${userId}`);
+  }
+
+  createBodyMeasurement(req: CreateBodyMeasurementRequest): Observable<BodyMeasurement> {
+    return this.http.post<BodyMeasurement>(`${this.base}/BodyMeasurement`, req);
+  }
+
+  updateBodyMeasurement(id: string, req: UpdateBodyMeasurementRequest): Observable<void> {
+    return this.http.put<void>(`${this.base}/BodyMeasurement/${id}`, req);
+  }
+
+  deleteBodyMeasurement(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.base}/BodyMeasurement/${id}`);
+  }
+
+  // ===== EXERCISE LIBRARY =====
+  getExercises(): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(`${this.base}/ExerciseLibrary`);
   }
 }

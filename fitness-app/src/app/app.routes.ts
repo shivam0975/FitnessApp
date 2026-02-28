@@ -28,6 +28,26 @@ export const routes: Routes = [
     loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
   {
+    path: 'progress',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/progress/progress.component').then(m => m.ProgressComponent)
+  },
+  {
+    path: 'goals',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/goals/goals.component').then(m => m.GoalsComponent)
+  },
+  {
+    path: 'nutrition',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/nutrition/nutrition.component').then(m => m.NutritionComponent)
+  },
+  {
+    path: 'measurements',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/measurements/measurements.component').then(m => m.MeasurementsComponent)
+  },
+  {
     path: 'workouts',
     canActivate: [authGuard],
     children: [

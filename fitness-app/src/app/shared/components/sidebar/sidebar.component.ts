@@ -22,7 +22,11 @@ export class SidebarComponent {
 
   navItems: NavItem[] = [
     { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
+    { label: 'Progress', icon: 'insights', route: '/progress' },
     { label: 'Workouts', icon: 'fitness_center', route: '/workouts' },
+    { label: 'Goals', icon: 'flag', route: '/goals' },
+    { label: 'Nutrition', icon: 'restaurant', route: '/nutrition' },
+    { label: 'Measurements', icon: 'monitor_weight', route: '/measurements' },
     { label: 'Profile', icon: 'person', route: '/profile' },
   ];
 

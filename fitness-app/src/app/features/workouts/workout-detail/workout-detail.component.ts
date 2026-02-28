@@ -4,7 +4,7 @@ import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../../../core/services/api.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { WorkoutLog, WorkoutExercise } from '../../../shared/models';
+import { WorkoutLog, WorkoutExercise, Exercise } from '../../../shared/models';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
@@ -140,8 +140,19 @@ import { LoadingSpinnerComponent } from '../../../shared/components/loading-spin
 
               <form [formGroup]="exerciseForm" (ngSubmit)="addExercise()">
                 <div class="form-group">
-                  <label class="form-label">Exercise ID *</label>
-                  <input type="text" class="form-control" formControlName="exerciseId" placeholder="UUID of exercise from library" />
+                  <label class="form-label">Exercise *</label>
+                  @if (exerciseLibrary().length === 0) {
+                    <input type="text" class="form-control" formControlName="exerciseId" placeholder="Exercise ID from library" />
+                  } @else {
+                    <select class="form-control" formControlName="exerciseId">
+                      <option value="">Select exercise</option>
+                      @for (ex of exerciseLibrary(); track ex.exerciseId) {
+                        <option [value]="ex.exerciseId">
+                          {{ ex.exerciseName }} — {{ ex.category }}
+                        </option>
+                      }
+                    </select>
+                  }
                 </div>
                 <div class="form-row-2">
                   <div class="form-group">
@@ -284,6 +295,7 @@ export class WorkoutDetailComponent implements OnInit {
   exercises = signal<WorkoutExercise[]>([]);
   showAddExercise = signal(false);
   addingExercise = signal(false);
+  exerciseLibrary = signal<Exercise[]>([]);
 
   exerciseForm = this.fb.group({
     exerciseId: ['', Validators.required],
@@ -307,6 +319,11 @@ export class WorkoutDetailComponent implements OnInit {
         this.loadExercises(w.workoutLogId);
       },
       error: () => { this.loading.set(false); this.router.navigate(['/workouts']); }
+    });
+
+    this.api.getExercises().subscribe({
+      next: list => this.exerciseLibrary.set(list.filter(e => e.isActive !== false)),
+      error: () => {}
     });
   }
 

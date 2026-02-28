@@ -153,6 +153,157 @@ export interface UpdateWorkoutExerciseRequest {
   notes?: string;
 }
 
+// ===== GOAL MODELS =====
+export interface Goal {
+  goalId: string;
+  userId: string;
+  goalType: string;
+  goalName: string;
+  targetValue: number;
+  currentValue: number;
+  unit: string;
+  startDate: string;
+  targetDate: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateGoalRequest {
+  userId: string;
+  goalType: string;
+  goalName: string;
+  targetValue: number;
+  currentValue: number;
+  unit: string;
+  startDate: string;
+  targetDate: string;
+  status?: string;
+}
+
+export interface UpdateGoalRequest {
+  goalType?: string;
+  goalName?: string;
+  targetValue?: number;
+  currentValue?: number;
+  unit?: string;
+  startDate?: string;
+  targetDate?: string;
+  status?: string;
+}
+
+// ===== NUTRITION LOG MODELS =====
+export interface NutritionLog {
+  nutritionLogId: string;
+  userId: string;
+  logDate: string;
+  mealType: string;
+  foodName: string;
+  servingAmount: number;
+  servingUnit: string;
+  caloriesKcal: number;
+  proteinG?: number;
+  carbsG?: number;
+  fatG?: number;
+  createdAt: string;
+}
+
+export interface CreateNutritionLogRequest {
+  userId: string;
+  logDate: string;
+  mealType: string;
+  foodName: string;
+  servingAmount: number;
+  servingUnit: string;
+  caloriesKcal: number;
+  proteinG?: number;
+  carbsG?: number;
+  fatG?: number;
+}
+
+export interface UpdateNutritionLogRequest {
+  logDate?: string;
+  mealType?: string;
+  foodName?: string;
+  servingAmount?: number;
+  servingUnit?: string;
+  caloriesKcal?: number;
+  proteinG?: number;
+  carbsG?: number;
+  fatG?: number;
+}
+
+// ===== BODY MEASUREMENT MODELS =====
+export interface BodyMeasurement {
+  measurementId: string;
+  userId: string;
+  measuredAt: string;
+  weightKg?: number;
+  bodyFatPercent?: number;
+  waistCm?: number;
+  hipsCm?: number;
+  bicepCm?: number;
+  chestCm?: number;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface CreateBodyMeasurementRequest {
+  userId: string;
+  measuredAt: string;
+  weightKg?: number;
+  bodyFatPercent?: number;
+  waistCm?: number;
+  hipsCm?: number;
+  bicepCm?: number;
+  chestCm?: number;
+  notes?: string;
+}
+
+export interface UpdateBodyMeasurementRequest {
+  measuredAt?: string;
+  weightKg?: number;
+  bodyFatPercent?: number;
+  waistCm?: number;
+  hipsCm?: number;
+  bicepCm?: number;
+  chestCm?: number;
+  notes?: string;
+}
+
+// ===== EXERCISE LIBRARY MODELS =====
+export interface Exercise {
+  exerciseId: string;
+  exerciseName: string;
+  category: string;
+  muscleGroup?: string;
+  metValue: number;
+  difficultyLevel: string;
+  instructions?: string;
+  isActive?: boolean;
+  createdAt: string;
+}
+
+export interface CreateExerciseRequest {
+  exerciseName: string;
+  category: string;
+  muscleGroup?: string;
+  metValue: number;
+  difficultyLevel?: string;
+  instructions?: string;
+  isActive?: boolean;
+}
+
+export interface UpdateExerciseRequest {
+  exerciseName?: string;
+  category?: string;
+  muscleGroup?: string;
+  metValue?: number;
+  difficultyLevel?: string;
+  instructions?: string;
+  isActive?: boolean;
+}
+
 // ===== AUTH STATE =====
 export interface AuthState {
   user: User | null;
