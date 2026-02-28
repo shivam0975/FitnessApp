@@ -1,47 +1,25 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd, NavigationStart, NavigationCancel, NavigationError } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from './core/services/auth.service';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, SidebarComponent, ToastComponent],
-  template: `
-    <div class="app-shell" [class.with-sidebar]="showSidebar()">
-      @if (showSidebar()) {
-        <app-sidebar></app-sidebar>
-        <main class="main-content" [class.sidebar-open]="showSidebar()">
-          <router-outlet></router-outlet>
-        </main>
-      } @else {
-        <router-outlet></router-outlet>
-      }
-      <app-toast></app-toast>
-    </div>
-  `,
-  styles: [`
-    .app-shell { min-height: 100vh; }
-    .app-shell.with-sidebar { display: flex; }
-    .main-content {
-      flex: 1;
-      margin-left: 260px;
-      min-height: 100vh;
-      transition: margin-left 0.3s cubic-bezier(0.4,0,0.2,1);
-      overflow-x: hidden;
-    }
-    @media (max-width: 768px) {
-      .main-content { margin-left: 0; }
-    }
-  `]
+  imports: [CommonModule, RouterOutlet, SidebarComponent, ToastComponent, LoadingSpinnerComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
+
+  routeLoading = signal(false);
 
   private currentUrl = toSignal(
     this.router.events.pipe(
@@ -57,4 +35,18 @@ export class AppComponent {
     const isAuthRoute = url.startsWith('/auth');
     return isAuth && !isAuthRoute;
   });
+
+  constructor() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.routeLoading.set(true);
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.routeLoading.set(false);
+      }
+    });
+  }
 }

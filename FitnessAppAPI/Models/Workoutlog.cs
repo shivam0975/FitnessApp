@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitnessAppAPI.Models;
 
@@ -15,6 +16,7 @@ public partial class Workoutlog
 
     public DateTime? EndTime { get; set; }
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public int? DurationMinutes { get; set; }
 
     public decimal? TotalCaloriesBurned { get; set; }

@@ -5,12 +5,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, LoadingSpinnerComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
     <div class="auth-layout">
       <!-- Left Panel -->

@@ -1,0 +1,49 @@
+<aside class="sidebar" [class.collapsed]="collapsed()">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons-round">fitness_center</span>
+          </div>
+          @if (!collapsed()) {
+            <span class="logo-text">FitTrack</span>
+          }
+        </div>
+        <button class="collapse-btn" (click)="toggleCollapse()">
+          <span class="material-icons-round">{{ collapsed() ? 'chevron_right' : 'chevron_left' }}</span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        @for (item of navItems; track item.route) {
+          <a class="nav-item" [routerLink]="item.route" routerLinkActive="active">
+            <span class="material-icons-round nav-icon">{{ item.icon }}</span>
+            @if (!collapsed()) {
+              <span class="nav-label">{{ item.label }}</span>
+            }
+            @if (!collapsed()) {
+              <div class="nav-active-indicator"></div>
+            }
+          </a>
+        }
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info" [class.collapsed]="collapsed()">
+          <div class="user-avatar">
+            {{ getInitials() }}
+          </div>
+          @if (!collapsed()) {
+            <div class="user-details">
+              <span class="user-name">{{ auth.user()?.username }}</span>
+              <span class="user-email">{{ auth.user()?.email }}</span>
+            </div>
+          }
+        </div>
+        <button class="logout-btn" (click)="auth.logout()" [title]="collapsed() ? 'Logout' : ''">
+          <span class="material-icons-round">logout</span>
+          @if (!collapsed()) {
+            <span>Logout</span>
+          }
+        </button>
+      </div>
+    </aside>
