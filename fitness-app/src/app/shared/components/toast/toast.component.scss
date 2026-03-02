@@ -1,0 +1,34 @@
+.toast-icon {
+  font-size: 20px;
+}
+.toast-success .toast-icon {
+  color: var(--success);
+}
+.toast-error .toast-icon {
+  color: var(--error);
+}
+.toast-warning .toast-icon {
+  color: var(--warning);
+}
+.toast-info .toast-icon {
+  color: var(--primary-light);
+}
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+}
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  transition: color 0.2s;
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+.toast {
+  cursor: pointer;
+}
