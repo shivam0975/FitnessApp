@@ -2,7 +2,6 @@
 
 [![Angular](https://img.shields.io/badge/Angular-21-DD0031?logo=angular&logoColor=white)](fitness-app/package.json)
 [![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=white)](FitnessAppApi/FitnessAppApi.csproj)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Driver-47A248?logo=mongodb&logoColor=white)](FitnessAppApi/FitnessAppApi.csproj)
 
 A full-stack fitness tracking application with JWT authentication, a .NET Web API backend, and an Angular frontend.
 
@@ -18,9 +17,9 @@ This project provides a complete fitness tracking workflow:
 
 ### Stack
 
-- Backend: ASP.NET Core (`net10.0`), MongoDB Driver, JWT Bearer auth, BCrypt password hashing
+- Backend: ASP.NET Core (`net10.0`), JWT Bearer auth, BCrypt password hashing
 - Frontend: Angular 21 standalone components, RxJS, reactive forms
-- Database: MongoDB
+- Database: MySql
 
 ## Why It Is Useful
 
@@ -35,7 +34,7 @@ This project provides a complete fitness tracking workflow:
 
 - Node.js 20+ and npm
 - .NET SDK 10
-- MongoDB instance (local or hosted)
+- MySql
 
 ### 1. Clone and install dependencies
 
@@ -54,7 +53,7 @@ The backend reads configuration from `FitnessAppApi/appsettings.json` and enviro
 
 Set these values before running in your environment:
 
-- `ConnectionStrings__MongoDbConnection`
+- `ConnectionStrings__MySql`
 - `Jwt__Key`
 - `Jwt__Issuer`
 - `Jwt__Audience`
@@ -62,7 +61,6 @@ Set these values before running in your environment:
 Example (macOS/Linux):
 
 ```bash
-export ConnectionStrings__MongoDbConnection="mongodb://localhost:27017"
 export Jwt__Key="replace-with-a-long-random-secret"
 export Jwt__Issuer="FitnessApi"
 export Jwt__Audience="FitnessApiUsers"
