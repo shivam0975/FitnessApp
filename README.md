@@ -26,7 +26,7 @@ This project provides a complete fitness tracking workflow:
 - Production-style architecture split into controllers, services, and repositories
 - End-to-end auth flow (register/login, token storage, guarded routes, secured APIs)
 - Clean baseline for extending into team challenges, reminders, tags, or reporting
-- Good learning reference for Angular + .NET + MongoDB integration
+- Good learning reference for Angular + .NET + MySql integration
 
 ## How To Get Started
 
