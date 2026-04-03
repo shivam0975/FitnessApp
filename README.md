@@ -104,6 +104,6 @@ The frontend API URL defaults to `http://localhost:5137` in `fitness-app/src/env
 
 ```text
 FitnessApp/
-├─ FitnessAppApi/  # ASP.NET Core API, auth, activity CRUD, MongoDB data access
+├─ FitnessAppApi/  # ASP.NET Core API, auth, activity CRUD
 └─ fitness-app/    # Angular UI, auth flow, activity pages/components
 ```
